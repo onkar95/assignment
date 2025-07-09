@@ -2,7 +2,7 @@
   "name": "telegram-weather-bot",
   "version": "1.0.0",
   "description": "A Telegram bot that provides weather updates with admin panel",
-  "main": "bot.js",
+  "main": "server.js",
   "scripts": {
     "start": "node bot.js",
     "dev": "nodemon bot.js"
