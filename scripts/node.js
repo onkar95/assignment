@@ -34,8 +34,7 @@ db.serialize(() => {
     )`);
 
     // Insert default settings
-    db.run(`INSERT OR REPLACE  INTO settings (key, value) VALUES ('telegram_token', '7822009202:AAEXOvZZ1NTPwSfjhz-2p8ltXl1IcqlcfZ4
- ')`);
+    db.run(`INSERT OR REPLACE INTO settings (key, value) VALUES ('telegram_token', '7822009202:AAEXOvZZ1NTPwSfjhz-2p8ltXl1IcqlcfZ4')`);
     db.run(`INSERT OR REPLACE  INTO settings (key, value) VALUES ('weather_api_key', '9db3c7974ec0468c904fedca1d938a7e')`);
     db.run(`INSERT OR IGNORE INTO settings (key, value) VALUES ('admin_password', 'admin123')`);
 });
@@ -62,7 +61,7 @@ const initializeBot = async () => {
     try {
         const settings = await getSettings();
         const token = settings.telegram_token;
-        console.log("token",token)
+        console.log("token", token)
         if (!token || token === 'YOUR_TELEGRAM_BOT_TOKEN') {
             console.log('Please set your Telegram bot token in the admin panel');
             return;
