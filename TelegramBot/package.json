@@ -4,11 +4,11 @@
   "description": "A Telegram bot that provides weather updates with admin panel",
   "main": "server.js",
   "scripts": {
-    "start": "node bot.js",
-    "dev": "nodemon bot.js"
+    "start": "node server.js",
+    "dev": "nodemon server.js"
   },
   "keywords": ["telegram", "bot", "weather", "nodejs"],
-  "author": "Your Name",
+  "author": "Onkar",
   "license": "MIT",
   "dependencies": {
     "node-telegram-bot-api": "^0.61.0",
