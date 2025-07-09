@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -168,12 +169,13 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="weather-icon">🌤️</div>
         <h1>Weather Bot</h1>
         <p>Get daily weather updates and forecasts directly in your Telegram</p>
-        
+
         <div class="features">
             <div class="feature">
                 <div class="feature-icon">📍</div>
@@ -236,10 +238,19 @@
     <script>
         // You can dynamically set the Telegram bot link here
         // For now, it's a placeholder
-        document.getElementById('telegramBtn').addEventListener('click', function(e) {
+        document.getElementById('telegramBtn').addEventListener('click', function (e) {
             e.preventDefault();
-            alert('Please contact the administrator to get the Telegram bot link.');
+
+            // alert('Please contact the administrator to get the Telegram bot link.');
+            var telegramBotUrl = 'https://t.me/Dummyb_bot'; // *** REPLACE THIS WITH YOUR ACTUAL TELEGRAM BOT LINK ***
+
+            // Redirect the user to the specified URL
+            window.location.href = telegramBotUrl;
+
+            // If you want to open it in a new tab instead of the current tab, use:
+            // window.open(telegramBotUrl, '_blank');
         });
     </script>
 </body>
+
 </html>
