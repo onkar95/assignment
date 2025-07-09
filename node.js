@@ -34,8 +34,9 @@ db.serialize(() => {
     )`);
 
     // Insert default settings
-    db.run(`INSERT OR IGNORE INTO settings (key, value) VALUES ('telegram_token', 'YOUR_TELEGRAM_BOT_TOKEN')`);
-    db.run(`INSERT OR IGNORE INTO settings (key, value) VALUES ('weather_api_key', 'YOUR_WEATHER_API_KEY')`);
+    db.run(`INSERT OR REPLACE  INTO settings (key, value) VALUES ('telegram_token', '7822009202:AAEXOvZZ1NTPwSfjhz-2p8ltXl1IcqlcfZ4
+ ')`);
+    db.run(`INSERT OR REPLACE  INTO settings (key, value) VALUES ('weather_api_key', '9db3c7974ec0468c904fedca1d938a7e')`);
     db.run(`INSERT OR IGNORE INTO settings (key, value) VALUES ('admin_password', 'admin123')`);
 });
 
@@ -61,7 +62,7 @@ const initializeBot = async () => {
     try {
         const settings = await getSettings();
         const token = settings.telegram_token;
-        
+        console.log("token",token)
         if (!token || token === 'YOUR_TELEGRAM_BOT_TOKEN') {
             console.log('Please set your Telegram bot token in the admin panel');
             return;
@@ -76,8 +77,8 @@ const initializeBot = async () => {
 
             // Add user to database
             db.run(`INSERT OR REPLACE INTO users (telegram_id, username, first_name, last_name) 
-                    VALUES (?, ?, ?, ?)`, 
-                [user.id, user.username, user.first_name, user.last_name], 
+                    VALUES (?, ?, ?, ?)`,
+                [user.id, user.username, user.first_name, user.last_name],
                 (err) => {
                     if (err) {
                         console.error('Error adding user:', err);
@@ -211,7 +212,7 @@ const getWeatherData = async (location) => {
     try {
         const settings = await getSettings();
         const apiKey = settings.weather_api_key;
-        
+
         if (!apiKey || apiKey === 'YOUR_WEATHER_API_KEY') {
             console.error('Weather API key not set');
             return null;
@@ -284,7 +285,7 @@ app.get('/', (req, res) => {
 app.post('/api/login', async (req, res) => {
     const { password } = req.body;
     const settings = await getSettings();
-    
+
     if (password === settings.admin_password) {
         res.json({ success: true });
     } else {
@@ -346,13 +347,13 @@ app.get('/api/settings', async (req, res) => {
 
 app.post('/api/settings', (req, res) => {
     const { key, value } = req.body;
-    
+
     db.run('INSERT OR REPLACE INTO settings (key, value) VALUES (?, ?)', [key, value], async (err) => {
         if (err) {
             res.status(500).json({ error: err.message });
         } else {
             res.json({ success: true });
-            
+
             // Reinitialize bot if telegram token was updated
             if (key === 'telegram_token') {
                 await initializeBot();
